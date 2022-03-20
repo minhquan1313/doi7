@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+html {
+  font-family: "Poppins", sans-serif;
+  font-size: 100%;
+}
+body {
+  background-color: #f1efec;
+}
+.container {
+  width: 600px;
+  margin-right: auto;
+  margin-left: auto;
+}
+h1 {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  text-align: center;
+  font-size: 50px;
+}
+.top {
+  position: relative;
+  height: 340px;
+  border-radius: 5px;
+  display: flex;
+  background-color: white;
+}
+.change {
+  position: absolute;
+
+  left: 20px;
+  height: 110%;
+  width: 260px;
+  top: -15px;
+  bottom: -15px;
+  opacity: 0.9;
+  background-color: black;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.up {
+  text-align: center;
+  width: 300px;
+
+  height: inherit;
+  flex: 1;
+}
+.in {
+  flex: 1;
+  text-align: center;
+}
+input {
+  margin-top: 12px;
+  height: 30px;
+  width: 200px;
+  border-radius: 5px;
+  border: 1px solid rgb(185, 182, 182);
+  padding-left: 10px;
+}
+.button {
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 4px 16px;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 25px;
+  border: 1px solid white;
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+.button.active {
+  background-color: rgb(185, 104, 223);
+  cursor: pointer;
+}
+button:not(:disabled) {
+  cursor: pointer;
+}
+.button {
+}
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 10px;
+  font-style: italic;
+}
+a:hover {
+  text-decoration: underline;
+}
+@keyframes scale {
+  0% {
+    animation: scale 1.5s;
+    left: 10px;
+    opacity: 0;
+  }
+  100% {
+    animation: scale 1.5s;
+    left: 300px;
+    opacity: 0.9;
+  }
+}
+
+.change.on {
+  left: 320px;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: end; */
+  align-items: end;
+  overflow: hidden;
+  pointer-events: none;
+}
+.modal * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.toast {
+  pointer-events: all;
+
+  position: relative;
+  display: flex;
+  width: 300px;
+  color: rgb(255, 153, 0);
+
+  background: #fff;
+  align-items: center;
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+  animation: toastShow 0.5s;
+}
+.toast.hide {
+  opacity: 0;
+}
+.toast:first-child {
+  margin-top: 32px;
+}
+.toast + .toast {
+  margin-top: 8px;
+}
+.toast::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-top-left-radius: 99px;
+  border-bottom-left-radius: 99px;
+  background: currentColor;
+  right: 100%;
+  content: "";
+}
+@keyframes toastShow {
+  0% {
+    transform: translateX(100%);
+  }
+}
+.close {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.icon {
+  font-size: 32px;
+  padding: 4px 8px;
+}
+.content {
+}
+.title {
+  color: #000;
+  font-weight: 600;
+}
+.message {
+  color: #ccc;
+  font-size: 12px;
+}

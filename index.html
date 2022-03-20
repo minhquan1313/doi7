@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" />
+  </head>
+  <body>
+    <div class="modal">
+      <!-- <div class="toast">
+        <div class="icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+        <div class="content">
+          <p class="title">Error</p>
+          <p class="message">Confirm password not match</p>
+        </div>
+        <div class="close">x</div>
+      </div>
+      <div class="toast">
+        <div class="icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+        <div class="content">
+          <p class="title">Error</p>
+          <p class="message">Confirm password not match</p>
+        </div>
+        <div class="close">x</div>
+      </div>
+      <div class="toast">
+        <div class="icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+        <div class="content">
+          <p class="title">Error</p>
+          <p class="message">Confirm password not match</p>
+        </div>
+        <div class="close">x</div>
+      </div> -->
+    </div>
+    <div class="container">
+      <h1>CONTEST MPC</h1>
+      <div class="top">
+        <div class="change"></div>
+        <div class="up">
+          <h3>Sign Up</h3>
+          <form>
+            <input type="text" id="userNameSignUp" class="userName" placeholder="Username" />
+            <input type="password" id="passwordSignUp" class="password" placeholder="Password" />
+            <input type="password" id="confirmPasswordSignUp" class="password2" placeholder="Confirm Password" /><br />
+            <div id="signUpBtn" class="button">Sign Up</div>
+            <br />
+            <a class="already">Already have an account?</a>
+          </form>
+        </div>
+        <div class="in">
+          <form>
+            <h3>Sign In</h3>
+            <input id="userNameSignIn" type="text" class="userName" placeholder="Username" />
+            <input id="passwordSignIn" type="password" class="password" placeholder="Password" /><br />
+            <div id="signInBtn" class="button">Sign In</div>
+            <br />
+            <a class="create">Create a new account?</a>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function readStorage(key) {
+        return JSON.parse(localStorage.getItem(key));
+      }
+      function writeStorage(key, value) {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
+      // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+      (function () {
+        const create = document.querySelector(".create");
+        const already = document.querySelector(".already");
+
+        console.log(create);
+
+        create.onclick = () => {
+          var change = document.querySelector(".change");
+
+          change.classList.add("on");
+        };
+        already.onclick = () => {
+          var change = document.querySelector(".change");
+
+          change.classList.remove("on");
+        };
+      })();
+
+      let users = readStorage("users") || writeStorage("users", []) || [];
+      let userIdCount = readStorage("userIdCount") || writeStorage("userIdCount", 1) || 1;
+      const userNameSignIn = document.querySelector("#userNameSignIn"),
+        passwordSignIn = document.querySelector("#passwordSignIn");
+      const userNameSignUp = document.querySelector("#userNameSignUp"),
+        passwordSignUp = document.querySelector("#passwordSignUp"),
+        confirmPasswordSignUp = document.querySelector("#confirmPasswordSignUp");
+
+      let isAllowSignIn = (isAllowSignUp = !1);
+
+      const btnIn = document.querySelector("#signInBtn");
+      const btnUp = document.querySelector("#signUpBtn");
+
+      userNameSignIn.addEventListener("input", (e) => onInput(e.target.value, allowSignIn, passwordSignIn));
+      passwordSignIn.addEventListener("input", (e) => onInput(e.target.value, allowSignIn, userNameSignIn));
+
+      userNameSignUp.addEventListener("input", (e) => onInput(e.target.value, allowSignUp, passwordSignUp, confirmPasswordSignUp));
+      passwordSignUp.addEventListener("input", (e) => onInput(e.target.value, allowSignUp, userNameSignUp, confirmPasswordSignUp));
+      confirmPasswordSignUp.addEventListener("input", (e) => onInput(e.target.value, allowSignUp, userNameSignUp, passwordSignUp));
+
+      function onInput(value, callback, ...ref) {
+        if (value && ref.find((r) => r.value !== "")) callback(!!1);
+        else callback(!1);
+      }
+
+      function allowSignIn(isAllow) {
+        if (isAllow) {
+          btnIn.classList.add("active");
+          isAllowSignIn = true;
+        } else {
+          btnIn.classList.remove("active");
+          isAllowSignIn = false;
+        }
+      }
+      function allowSignUp(isAllow) {
+        if (isAllow) {
+          btnUp.classList.add("active");
+          isAllowSignUp = true;
+        } else {
+          btnUp.classList.remove("active");
+          isAllowSignUp = false;
+        }
+      }
+
+      function validateIn(userName, pass) {
+        const user = users.find((r) => r.userName === userName && r.password === pass);
+        return user;
+      }
+
+      function makeNewUser(userName, pass) {
+        const newUser = {
+          userName,
+          password: pass,
+          userId: userIdCount++,
+        };
+        users.push(newUser);
+
+        writeStorage("users", users);
+        writeStorage("userIdCount", userIdCount);
+
+        return newUser;
+      }
+      function redirectHome() {
+        window.location.href = "/home.html";
+      }
+      btnIn.addEventListener("click", () => {
+        if (isAllowSignIn) {
+          const userName = userNameSignIn.value;
+          const pass = passwordSignIn.value;
+          const user = validateIn(userName, pass);
+          if (user) {
+            writeStorage("currentUser", { userName, userId: user.userId });
+            redirectHome();
+          } else toast("Invalid username or password");
+        }
+      });
+      btnUp.addEventListener("click", () => {
+        if (isAllowSignUp) {
+          const userName = userNameSignUp.value;
+          const pass = passwordSignUp.value;
+          const confirmPass = confirmPasswordSignUp.value;
+
+          if (pass === confirmPass) {
+            const existUser = users.find((r) => r.userName === userName);
+            if (!existUser) {
+              writeStorage("currentUser", makeNewUser(userName, pass));
+              redirectHome();
+            } else toast("Username exist");
+          } else toast("Password not match");
+        }
+      });
+
+      function closeToast(node) {
+        node.classList.add("hide");
+        setTimeout(() => {
+          node.remove();
+        }, 500);
+      }
+      function toast(message) {
+        const div = document.createElement("div");
+        div.className = "toast";
+
+        div.innerHTML = `
+        <div class="icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+        <div class="content">
+          <p class="title">Error</p>
+          <p class="message">${message}</p>
+        </div>
+        <div class="close">x</div>`;
+        let tOut = setTimeout(() => {
+          closeToast(div);
+        }, 3000);
+        div.querySelector(".close").addEventListener("click", () => {
+          clearTimeout(tOut);
+          closeToast(div);
+        });
+        document.querySelector(".modal").appendChild(div);
+      }
+
+      // writeStorage("users", [
+      //   { userName: "Quan", userId: 1, password: "123" },
+      //   { userName: "Long", userId: 2, password: "123" },
+      // ]);
+
+      // var users = {};
+      // console.log(users);
+      // const run = document.querySelector(".button");
+
+      // run.onclick = () => {
+      //   if (!localStorage.getItem("idCount")) localStorage.setItem("idCount", 0);
+      //   const userName = document.querySelector(".userName").value;
+      //   const password = document.querySelector(".password").value;
+      //   const password2 = document.querySelector(".password2").value;
+      //   console.log(userName);
+      //   const idCount = localStorage.getItem("idCount");
+      //   if (password == password2) {
+      //     users.userName = userName;
+      //     users.password = password;
+      //     console.log(users);
+
+      //     if (check(userName) == false) {
+      //       console.log(check(userName));
+      //       localStorage.setItem("users" + idCount, JSON.stringify(users));
+      //       localStorage.setItem("idCount", Number(idCount) + 1);
+      //     } else {
+      //       console.log("ddang nhap");
+      //     }
+      //     /// dang nhap vaof
+      //   }
+
+      //   function checkPW(userName, password) {
+      //     for (i = 0; i < localStorage.getItem("idCount"); i++) {
+      //       tam = JSON.parse(localStorage.getItem("users" + i));
+
+      //       if (userName == tam.userName && password == tam.password) {
+      //         console.log("tam" + tam);
+      //         return true;
+      //       }
+      //     }
+      //     return false;
+      //   }
+      //   function check(userName) {
+      //     for (i = 0; i < localStorage.getItem("idCount"); i++) {
+      //       tam = JSON.parse(localStorage.getItem("users" + i));
+
+      //       if (userName == tam.userName) {
+      //         console.log("tam" + tam);
+      //         return true;
+      //       }
+      //     }
+      //     return false;
+      //   }
+      // };
+    </script>
+  </body>
+</html>

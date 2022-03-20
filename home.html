@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+
+    <link rel="stylesheet" href="home.css" />
+    <script src="https://kit.fontawesome.com/008a52e9c4.js" crossorigin="anonymous"></script>
+    <style>
+      :root {
+        /* --color-1: var(--d-color-1); */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <header class="shadow">
+        <div class="container flex justify-between items-center">
+          <div class="logo relative">MPC</div>
+          <div class="user-avatar relative round border aspect-square shrink-0 h-full flex items-center justify-center">
+            <i class="fa-solid fa-user"></i>
+            <ul class="user-submenu absolute nowrap w-full shadow transition">
+              <li class="flex items-center w-full transition"><i class="fa-solid fa-address-card"></i> Edit profile</li>
+              <li class="signOut flex items-center w-full transition"><i class="fa-solid fa-arrow-right-from-bracket"></i> Sign out</li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <main class="container flex">
+        <div class="side side-l">
+          <div class="search round bg-white overflow-hidden flex items-center">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="w-full border-transparent" />
+          </div>
+          <div class="divider-x"></div>
+          <ul class="grid gap-1">
+            <li class="active item-link transition cursor-pointer flex items-center"><i class="fa-solid fa-house"></i> Home</li>
+            <li class="item-link transition cursor-pointer flex items-center"><i class="fa-brands fa-facebook-messenger"></i> Messenger</li>
+            <li class="item-link transition cursor-pointer flex items-center"><i class="fa-solid fa-bell"></i> Notifications</li>
+          </ul>
+          <div class="divider-x"></div>
+          <ul class="grid gap-1">
+            <li class="item-link transition cursor-pointer flex items-center"><i class="fa-solid fa-user-group"></i>Friends</li>
+            <li class="item-link transition cursor-pointer flex items-center"><i class="fa-solid fa-bookmark"></i>Saved</li>
+            <li class="item-link transition cursor-pointer flex items-center"><i class="fa-solid fa-gamepad"></i>Games</li>
+            <li class="item-link transition cursor-pointer flex items-center"><i class="fa-solid fa-layer-group"></i>Group</li>
+            <li class="item-link transition cursor-pointer flex items-center"><i class="fa-solid fa-star"></i>Favorite</li>
+          </ul>
+          <div class="divider-x"></div>
+          <div class="dlGroup relative w-full flex overflow-hidden">
+            <label id="light">
+              <div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-sun"></i> Light</div>
+            </label>
+            <label id="dark">
+              <div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-moon"></i> Dark</div>
+            </label>
+            <div class="floating transition absolute"></div>
+          </div>
+        </div>
+        <div class="middle flex-1">
+          <div class="card whatUThink flex items-center">
+            <div class="user-avatar relative round border aspect-square shrink-0 h-full flex items-center justify-center">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <span>Hmmm, what do you think?</span>
+          </div>
+
+          <div class="allPost">
+            <div class="card post relative">
+              <div class="flex info justify-between">
+                <div class="flex">
+                  <div class="user-avatar relative round border aspect-square shrink-0 flex items-center justify-center">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                  <div class="">
+                    <h2 class="">anvyidol</h2>
+                    <h3 class="">20/03 <i class="fa-solid fa-earth-africa"></i></h3>
+                  </div>
+                </div>
+                <div class="icon flex items-center justify-center">
+                  <i class="fa-solid fa-trash"></i>
+                </div>
+              </div>
+              <div class="content">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam amet voluptas molestiae blanditiis incidunt consequuntur suscipit
+                quis assumenda eveniet nam.
+              </div>
+              <div class="react user-avatar absolute round border aspect-square shrink-0 flex items-center justify-center">
+                <i class="active fa-solid fa-heart"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="side side-r">
+          <div class="">
+            <h2 class="text-lg">Online users</h2>
+            <div class="divider-x"></div>
+            <ul>
+              <li class="flex items-center">
+                <div class="user-avatar relative round border aspect-square shrink-0 h-full flex items-center justify-center">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                User 1
+              </li>
+              <li class="flex items-center">
+                <div class="user-avatar relative round border aspect-square shrink-0 h-full flex items-center justify-center">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                User 2
+              </li>
+              <li class="flex items-center">
+                <div class="user-avatar relative round border aspect-square shrink-0 h-full flex items-center justify-center">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                User 3
+              </li>
+              <li class="flex items-center">
+                <div class="user-avatar relative round border aspect-square shrink-0 h-full flex items-center justify-center">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                User 4
+              </li>
+            </ul>
+          </div>
+          <div class="">
+            <h2 class="text-lg">Online Group</h2>
+            <div class="divider-x"></div>
+            <ul>
+              <li class="flex items-center">
+                <div class="user-avatar relative round border aspect-square shrink-0 h-full flex items-center justify-center">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                Group 1
+              </li>
+              <li class="flex items-center">
+                <div class="user-avatar relative round border aspect-square shrink-0 h-full flex items-center justify-center">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                Group 2
+              </li>
+              <li class="flex items-center">
+                <div class="user-avatar relative round border aspect-square shrink-0 h-full flex items-center justify-center">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                Group 3
+              </li>
+            </ul>
+          </div>
+        </div>
+      </main>
+      <div class="goodluck shadow2 flex justify-center items-center">
+        Goodluck!
+        <div class=""></div>
+      </div>
+      <div class="modal transition">
+        <div class="new-post transition">
+          <h1>New post</h1>
+          <textarea name="" id="" cols="30" rows="10"></textarea>
+          <div class="btn round transition">Post</div>
+          <div class="close">x</div>
+        </div>
+      </div>
+    </div>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <script src="home.js"></script>
+  </body>
+</html>
