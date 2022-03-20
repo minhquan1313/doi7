@@ -247,6 +247,6 @@ function writeStorage(key, value) {
   signOutBtn.addEventListener("click", () => {
     console.log("click");
     writeStorage("currentUser", {});
-    window.location.href = "/";
+    window.location.href = "/doi7/";
   });
 })();
